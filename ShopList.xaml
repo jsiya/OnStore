@@ -1,0 +1,125 @@
+﻿<Window x:Class="OnStore.ShopList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OnStore"
+        mc:Ignorable="d"
+        Title="ShopList" 
+        MinHeight="500" 
+        MinWidth="500" 
+        MaxHeight="500" 
+        MaxWidth="500" 
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="#F1FAEE">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" 
+              Background="#1D3557">
+            <TextBlock 
+                Text="My List"
+                Foreground="#457B9D"
+                FontSize="30"
+                FontWeight="DemiBold"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                />
+        </Grid>
+        <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding SelectedItems}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border 
+                                Background="#F1FAEE" 
+                                CornerRadius="10" 
+                                Width="400" 
+                                Margin="10" 
+                                Height="70" 
+                                BorderBrush="#457B9D" 
+                                BorderThickness="2">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Border 
+                                            CornerRadius="20" 
+                                            BorderThickness="1" 
+                                            BorderBrush="#1D3557"
+                                            Margin="5">
+                                            <Image 
+                                            Source="{Binding ImageLink}" 
+                                            Stretch="Uniform" 
+                                            Margin="5"/>
+                                        </Border>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <TextBlock 
+                                            Text="{Binding Name}" 
+                                            FontSize="18" 
+                                            FontWeight="DemiBold" 
+                                            Foreground="#1D3557" 
+                                            VerticalAlignment="Center"
+                                            Margin="10"
+                                            />
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <TextBlock Foreground="#E63946"
+                                                   FontSize="14"
+                                                   FontWeight="DemiBold"
+                                                   VerticalAlignment="Center">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat=" {0} AZN">
+                                                    <Binding Path="Price"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Grid>
+                                    <Grid Grid.Column="3">
+                                        <CheckBox 
+                                            IsChecked="{Binding IsCheck}"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Row="2">
+            <StackPanel 
+                Orientation="Horizontal" 
+                Margin="10,2" 
+                HorizontalAlignment="Center">
+                <Button 
+                    Style="{DynamicResource BtnStyle}" 
+                    Content="Delete All" 
+                    Width="200" 
+                    Margin="20, 0"
+                    Click="DeleteAllProducts"
+                    />
+                <Button 
+                    Style="{DynamicResource BtnStyle}" 
+                    Content="Buy" 
+                    Width="200" 
+                    Margin="20, 0"
+                    Click="BuySelectedProducts"
+                    />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
